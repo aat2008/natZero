@@ -9,6 +9,7 @@ const port = process.env.PORT || process.env.NODE_PORT || 3000;
 const urlStruct = {
   '/': htmlHandler.getIndex,
   '/stylesheet': htmlHandler.getCSS,
+  '/background': natZeroHandler.getBackground,
   '/natZeroRepo': natZeroHandler.getNatZero,
 };
 
