@@ -460,7 +460,7 @@
                 "clay":{
                     "info": "Clay genasi are descendants of the elementals residing in the Mud Hills, on the border of the Planes of Earth and Water. While earth genasi typically have sharp features upon their skin or rough exteriors, the skin of clay genasi are impossibly smooth and cool to the touch. Their skin manifests in a variety of shades, from a light tan to a heavy brown, to hue of red and pale grey. On hotter days their skin warms and adheres to garments and surfaces. Clay genasi are usually cool-headed and slow to speech. Just like their earth genasi cousins, occasionally fractures appear on the surface of their bodies, revealing a pale light from within.",
                     "abilityscore2": "Your Charisma score increases by 1",
-                    "maluableform": "Due to your clay form, your features are more maluable. You have advantage on all Charisma checks and saving throws.",
+                    "malleableform": "Due to your clay form, your features are more malleable and can be molded to fit a desired look. Whenever you make a Charisma based check or saving throw you can add a d4 to the roll. You can do this a number of times equal to your Constitution Modifer and regain all expended uses after a long rest (minimum of 1).",
                     "binding_clay": "You can cast the maximilian's earthen grasp spell once with this trait, requiring no material components, and you regain the ability to cast it this way when you finish a long rest. Constitution is your spellcasting ability for this spell."
                 },
                 "earth":{

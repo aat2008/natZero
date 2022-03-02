@@ -13,7 +13,7 @@ const getCSS = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'text/css' });
   response.write(css);
   response.end();
-}
+};
 
 module.exports = {
   getIndex,
