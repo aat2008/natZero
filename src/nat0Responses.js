@@ -3,6 +3,7 @@ const natZero = require('./natZeroRepo.json');
 
 const fs = require('fs');
 const dndpaper = fs.readFileSync(`${__dirname}/../client/dndpaper.png`);
+const dice = fs.readFileSync(`${__dirname}/../client/d20.png`);
 
 
 const getNatZero = (request, response) => {
@@ -18,8 +19,15 @@ const getBackground = (request, response) => {
     response.end();
 }
 
+const getLogo = (request, response) => {
+    response.writeHead(200, { 'Content-Type': 'image/png' });
+    response.write(dice);
+    response.end();
+}
+
 
 module.exports = {
     getNatZero,
-    getBackground
+    getBackground,
+    getLogo
   };

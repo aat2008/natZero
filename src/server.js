@@ -7,10 +7,11 @@ const natZeroHandler = require('./nat0Responses.js');
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 const urlStruct = {
-  '/': htmlHandler.getIndex,
-  '/stylesheet': htmlHandler.getCSS,
-  '/background': natZeroHandler.getBackground,
-  '/natZeroRepo': natZeroHandler.getNatZero,
+  '/': htmlHandler.getIndex, // Default
+  '/stylesheet': htmlHandler.getCSS, // Stylesheet
+  '/background': natZeroHandler.getBackground, //Dnd Paper Background
+  '/logo': natZeroHandler.getLogo, //D20 Logo
+  '/natZeroRepo': natZeroHandler.getNatZero //The big repo
 };
 
 const onRequest = (request, response) => {

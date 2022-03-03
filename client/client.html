@@ -8,40 +8,441 @@
     <link rel="stylesheet" type="text/css" href="/stylesheet">
     <title>Frontpage - natZero</title>
     <script>
+      const handleResponse = (response, callback, key) => {
+        const content = document.querySelector('#content');
+
+
+      response.text().then((resText) => {
+        const p = document.createElement('p');
+        const contentType = response.headers.get('Content-Type');
+
+        const parsedResponse = JSON.parse(resText);
         
+        
+        callback(parsedResponse, key);
+        //content.appendChild(p);   
+      });
+    }
+
+    const sendFetch = async (callback, key) => {
+      const url = "/natZeroRepo";
+      const type = "application/json";
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Accept': type
+        },
+      });
+
+      handleResponse(response, callback, key);
+    };
+
+      function handleClick(clicked){
+          console.log(clicked);
+
+          let keywords = clicked.split("-");
+
+          if(keywords[0] == "home"){
+            showHome();
+          }
+          if(keywords[0] == "about"){
+            showAbout();
+          }
+
+          if(keywords[0] == "lore"){
+            sendFetch(showLore, keywords[1]);
+          }
+
+          if(keywords[0] == "races"){
+            sendFetch(showRaces, keywords[1]);
+          }
+
+          if(keywords[0] == "spells"){
+            sendFetch(showSpells, keywords[1]);
+          }
+          
+          if(keywords[0] == "classes"){
+            sendFetch(showClasses, keywords[1]);
+          }
+        };
+      function showHome(){
+        const html = `
+        <p> 
+          Welcome to the land of Ethyria, a world of magic and innovation. Inventors all around the world attempting to find the next spark to light the way in the unknown future.
+        </p>
+        <p> 
+          With unknown dangers and forgotten ruins, there is Mysteries to be Discovered and Adventure to be had. 
+        </p>
+        `
+        document.getElementById("content").innerHTML = html;
+      }
+      function showAbout(){
+        const html = `
+        <p> 
+          Offical Credits:
+        </p>
+        `
+        document.getElementById("content").innerHTML = html;
+      }
+
+      function showSpells(nat0, key){
+        const spells = nat0.spells;
+        let html = `
+        <h2> 
+          Display Spells
+        </h2>
+        `
+        document.getElementById("content").innerHTML = html;
+      }
+
+      function showLore(nat0, key){
+        const lore = nat0.lore;
+        let html;
+        if(key == "gods"){
+          const gods = lore.deities; // Ugly code but will have to do for now, for one if I change the notes about each god to arrays so that way I can properly iterate through it without issues
+          html = `
+            <h2> 
+              ${gods.the_eight.name}
+            </h2>
+            <header class="infoblock">
+              ${gods.the_eight.info}
+            </header>
+            
+            <header>
+              ${gods.the_eight.malan.name}: ${gods.the_eight.malan.title}
+            </header>
+            <p>
+              Holy Symbol: ${gods.the_eight.malan.holysymbol}<br>
+              Domains: ${gods.the_eight.malan.domains}<br>
+              Presenting: ${gods.the_eight.malan.presenting}
+            </p>
+
+            <header>
+              ${gods.the_eight.yul.name}: ${gods.the_eight.yul.title}
+            </header>
+            <p>
+              Holy Symbol: ${gods.the_eight.yul.holysymbol}<br>
+              Domains: ${gods.the_eight.yul.domains}<br>
+              Presenting: ${gods.the_eight.yul.presenting}
+            </p>
+
+            <header>
+              ${gods.the_eight.adir.name}: ${gods.the_eight.adir.title}
+            </header>
+            <p>
+              Holy Symbol: ${gods.the_eight.adir.holysymbol}<br>
+              Domains: ${gods.the_eight.adir.domains}<br>
+              Presenting: ${gods.the_eight.adir.presenting}
+            </p>
+
+            <header>
+              ${gods.the_eight.salan.name}: ${gods.the_eight.salan.title}
+            </header>
+            <p>
+              Holy Symbol: ${gods.the_eight.salan.holysymbol}<br>
+              Domains: ${gods.the_eight.salan.domains}<br>
+              Presenting: ${gods.the_eight.salan.presenting}
+            </p>
+
+            <header>
+              ${gods.the_eight.solin.name}: ${gods.the_eight.solin.title}
+            </header>
+            <p>
+              Holy Symbol: ${gods.the_eight.solin.holysymbol}<br>
+              Domains: ${gods.the_eight.solin.domains}<br>
+              Presenting: ${gods.the_eight.solin.presenting}
+            </p>
+
+            <header>
+              ${gods.the_eight.tavak.name}: ${gods.the_eight.tavak.title}
+            </header>
+            <p>
+              Holy Symbol: ${gods.the_eight.tavak.holysymbol}<br>
+              Domains: ${gods.the_eight.tavak.domains}<br>
+              Presenting: ${gods.the_eight.tavak.presenting}
+            </p>
+
+            <header>
+              ${gods.the_eight.veldr.name}: ${gods.the_eight.veldr.title}
+            </header>
+            <p>
+              Holy Symbol: ${gods.the_eight.veldr.holysymbol}<br>
+              Domains: ${gods.the_eight.veldr.domains}<br>
+              Presenting: ${gods.the_eight.veldr.presenting}
+            </p>
+
+            <header>
+              ${gods.the_eight.zula.name}: ${gods.the_eight.zula.title}
+            </header>
+            <p>
+              Holy Symbol: ${gods.the_eight.zula.holysymbol}<br>
+              Domains: ${gods.the_eight.zula.domains}<br>
+              Presenting: ${gods.the_eight.zula.presenting}
+            </p>
+          `
+        }
+        if(key == "continents"){
+          const continents = lore.continents;
+          html = `
+            <h2> 
+              ${continents.yesterfell.name}
+            </h2>
+
+            <header>
+              ${continents.yesterfell.nations.alforia.name}
+            </header>
+            <p>
+              
+            </p>
+
+            <header>
+              ${continents.yesterfell.nations.rasmil.name}
+            </header>
+            <p>
+              
+            </p>
+
+            <header>
+              ${continents.yesterfell.nations.sedin.name}
+            </header>
+            <p>
+              
+            </p>
+
+            <h2> 
+              ${continents.auspire.name}
+            </h2>
+
+            <h2> 
+              ${continents.wulphenyr.name}
+            </h2>
+
+            <h2> 
+              ${continents.burnland.name}
+            </h2>
+
+            <h2> 
+              ${continents.icefeld.name}
+            </h2>
+          `
+        }
+        if(key == "calendar"){
+          html = `
+            <h2> 
+              Display Calendar
+            </h2>
+          `
+        }
+        
+        document.getElementById("content").innerHTML = html;
+      }
+
+      function showRaces(nat0, key){
+        const races = nat0.races;
+        let html;
+        if(key == "common"){
+          html = `
+            <h2> 
+              Common Races
+            </h2>
+          `
+        }
+        if(key == "exotic"){
+          const exotic = races.exotic;
+          html = `
+            <h2>  
+              Exotic Races
+            </h2>
+
+            <br>
+
+            <header>
+              Genasi
+            </header>
+            <header class="infoblock">
+              ${exotic.genasi.description}
+            </header>
+            <p>
+              <b>Ability Score Increase.</b> ${exotic.genasi.abilityscore}<br>
+              <b>Age.</b> ${exotic.genasi.age}<br>
+              <b>Size.</b> ${exotic.genasi.size}<br>
+              <b>Speed.</b> ${exotic.genasi.speed}<br>
+              <b>Languages.</b> ${exotic.genasi.languages}<br>
+              <br>
+              <b class="sub">Fire</b>
+                <div class="indent">
+                  <p class="infoblock">${exotic.genasi.fire.info}<p>
+                  <p>
+                    <b>Ability Score Increase.</b> ${exotic.genasi.fire.abilityscore2}<br>
+                    <b>Darkvision.</b> ${exotic.genasi.fire.darkvision}<br>
+                    <b>Fire Resistance.</b> ${exotic.genasi.fire.resistance}<br>
+                    <b>Reach to the Blaze.</b> ${exotic.genasi.fire.reachtotheblaze}<br>
+                  </p>
+                </div>
+
+              <b class="sub">Ash</b>
+                <div class="indent">
+                  <p class="infoblock">${exotic.genasi.ash.info}<p>
+                  <p>
+                    <b>Ability Score Increase.</b> ${exotic.genasi.ash.abilityscore2}<br>
+                    <b>Between the Smoke.</b> ${exotic.genasi.ash.betweenthesmoke}<br>
+                    <b>Fire Resistance.</b> ${exotic.genasi.ash.resistance}<br>
+                    <b>One with the Veil.</b> ${exotic.genasi.ash.onewithveil}<br>
+                  </p>
+                </div>
+
+              <b class="sub">Air</b>
+                <div class="indent">
+                  <p class="infoblock">${exotic.genasi.air.info}<p>
+                  <p>
+                    <b>Ability Score Increase.</b> ${exotic.genasi.air.abilityscore2}<br>
+                    <b>Unending Breath.</b> ${exotic.genasi.air.unendingbreath}<br>
+                    <b>Mingle with the Wind.</b> ${exotic.genasi.air.minglewithwind}<br>
+                  </p>
+                </div>
+
+              <b class="sub">Ice</b>
+                <div class="indent">
+                  <p class="infoblock">${exotic.genasi.ice.info}<p>
+                  <p>
+                    <b>Ability Score Increase.</b> ${exotic.genasi.ice.abilityscore2}<br>
+                    <b>Frozen Faith.</b> ${exotic.genasi.ice.frozenfaith}<br>
+                    <b>Cold Resistance.</b> ${exotic.genasi.ice.resistance}<br>
+                    <b>Frost Walk.</b> ${exotic.genasi.ice.frostwalk}<br>
+                  </p>
+                </div>
+
+              <b class="sub">Water</b>
+                <div class="indent">
+                  <p class="infoblock">${exotic.genasi.water.info}<p>
+                  <p>
+                    <b>Ability Score Increase.</b> ${exotic.genasi.water.abilityscore2}<br>
+                    <b>Amphibious.</b> ${exotic.genasi.water.amphibious}<br>
+                    <b>Acid Resistance.</b> ${exotic.genasi.water.resistance}<br>
+                    <b>Swim.</b> ${exotic.genasi.water.swim}<br>
+                    <b>Call to the Wave.</b> ${exotic.genasi.water.calltowave}<br>
+                  </p>
+                </div>
+              
+              <b class="sub">Clay</b>
+                <div class="indent">
+                  <p class="infoblock">${exotic.genasi.clay.info}<p>
+                  <p>
+                    <b>Ability Score Increase.</b> ${exotic.genasi.clay.abilityscore2}<br>
+                    <b>Malleable Form.</b> ${exotic.genasi.clay.malleableform}<br>
+                    <b>Binding Clay.</b> ${exotic.genasi.clay.binding_clay}<br>
+                  </p>
+                </div>
+
+              <b class="sub">Earth</b>
+                <div class="indent">
+                  <p class="infoblock">${exotic.genasi.earth.info}<p>
+                  <p>
+                    <b>Ability Score Increase.</b> ${exotic.genasi.earth.abilityscore2}<br>
+                    <b>Earth Walk.</b> ${exotic.genasi.earth.earthwalk}<br>
+                    <b>Merge with Stone.</b> ${exotic.genasi.earth.mergewithstone}<br>
+                  </p>
+                </div>
+
+              <b class="sub">Magma</b>
+                <div class="indent">
+                  <p class="infoblock">${exotic.genasi.magma.info}<p>
+                  <p>
+                    <b>Ability Score Increase.</b> ${exotic.genasi.magma.abilityscore2}<br>
+                    <b>Molten Shell.</b> ${exotic.genasi.magma.moltenshell}<br>
+                    <b>Fire Resistance.</b> ${exotic.genasi.magma.resistance}<br>
+                    <b>Searing Combustion.</b> ${exotic.genasi.magma.searingcombustion}<br>
+                  </p>
+                </div>
+            </p>
+          `
+        }
+        if(key == "monsterous"){
+          html = `
+            <h2>  
+              Monsterous Races
+            </h2> 
+          `
+        }
+        document.getElementById("content").innerHTML = html;
+      }
+
+      function showClasses(nat0, key){
+        let html = `
+        <header> 
+          ${nat0.classes.barbarian.name}
+        </header>
+        `
+        document.getElementById("content").innerHTML = html;
+      }
+      
+
+      const init = () => {
+
+      }
+      window.onload = init;
+
     </script>
 </head>
 <body>
-    <h1>natZero</h1>
-<nav id="primary_nav_wrap">
-<ul>
-  <li class="current-menu-item"><a href="#">Home</a></li>
-  <li><a href="#">Erythia</a>
-    <ul>
-      <li><a href="#">Continents</a></li>
-      <li><a href="#">Dieties</a></li>
-      <li><a href="#">Calendar</a></li>
-    </ul>
-  </li>
-  <li><a href="#">Races</a>
-    <ul>
-      <li><a href="#">Common</a></li>
-      <li><a href="#">Exotic</a></li>
-      <li><a href="#">Monsterous</a></li>
-    </ul>
-  </li>
-  <li><a href="#">Spells</a>
-    <ul>
-      <li><a href="#">All Spells</a></li>
-      <li><a href="#">[Class] Spell List</a></li>
-      <li><a href="#">[Class] Spell List</a></li>
-      <li><a href="#">[Class] Spell List</a></li>
-      <li><a href="#">[Class] Spell List</a></li>
-    </ul>
-  </li>
-  <li><a href="#">Classes</a></li>
-  <li><a href="#">About</a></li>
-</ul>
-</nav>
+  <nav>
+    <div id="logo">natZer<img src="/logo" alt="logo" width="20" height="20"></div>
+
+    <label for="drop" class="toggle">Menu</label>
+    <input type="checkbox" id="drop" />
+        <ul class="menu">
+            <li><a href="#"  onclick="handleClick('home')">Home</a></li>
+            <li>
+                <!-- First Tier Drop Down -->
+                <label for="drop-1" class="toggle">World</label>
+                <a href="#">World</a>
+                <input type="checkbox" id="drop-1"/>
+                <ul>
+                    <li><a href="#" onclick="handleClick('lore-gods')">Dieties</a></li>
+                    <li><a href="#" onclick="handleClick('lore-continents')">Continents X</a></li>
+                    <li><a href="#" onclick="handleClick('lore-calendar')">Calendar X</a></li>
+                </ul> 
+
+            </li>
+            <li>
+
+                <!-- First Tier Drop Down -->
+                <label for="drop-2" class="toggle">Races</label>
+                <a href="#">Races</a>
+                <input type="checkbox" id="drop-2"/>
+                <ul>
+                    <li><a href="#" onclick="handleClick('races-common')">Common X</a></li>
+                    <li><a href="#" onclick="handleClick('races-exotic')">Exotic</a></li>
+                    <li><a href="#" onclick="handleClick('races-monsterous')">Monsterous X</a></li>
+                </ul>
+            </li>
+
+            <li>
+
+              <!-- First Tier Drop Down -->
+              <label for="drop-2" class="toggle">Spells</label>
+              <a href="#">Spells</a>
+              <input type="checkbox" id="drop-2"/>
+              <ul>
+                  <li><a href="#" onclick="handleClick('spells-all')">All Spells X</a></li>
+                  <li><a href="#">[Blank] Spell List</a></li>
+                  <li><a href="#">[Blank] Spell List</a></li>
+              </ul>
+          </li>
+
+            <li><a href="#" onclick="handleClick('classes')">Classes</a></li>
+            <li><a href="#" onclick="handleClick('about')">About</a></li>
+        </ul>
+    </nav>
+
+    <div id="content">
+      <p> 
+        Welcome to the land of Ethyria, a world of magic and innovation. Inventors all around the world attempting to find the next spark to light the way in the unknown future.
+      </p>
+      <p> 
+        With unknown dangers and forgotten ruins, there is Mysteries to be Discovered and Adventure to be had. 
+      </p>
+    </div>
 </body>
 </html>
