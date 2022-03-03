@@ -72,15 +72,23 @@
           Welcome to the land of Ethyria, a world of magic and innovation. Inventors all around the world attempting to find the next spark to light the way in the unknown future.
         </p>
         <p> 
-          With unknown dangers and forgotten ruins, there is Mysteries to be Discovered and Adventure to be had. 
+          With unknown dangers and forgotten ruins, there are Mysteries to be Discovered and Adventures to be had. 
         </p>
         `
         document.getElementById("content").innerHTML = html;
       }
       function showAbout(){
         const html = `
+        <p>
+          This Repo is meant to be a wiki for the players I DM for, I have a couple ideas I've wanted to mess around with and this will help keep it all organized for them <br>
+          and for myself. Here I'll put down things such as playable races, world lore, and homebrew stuff I think is cool. Any tab marked with an "X" is under construction and this <br>
+          at the moment is just merely meant to be a proof of concept showing a bit of my API at work. Due to the MAGNITUDE of information the PHB has I wasnt able to complete it all <br>
+          and instead opted for the smaller bits of homebrew and worldbuilding as to show my API working. Even after finishing this project I'll likely continue to work on this to make it <br>
+          essencially a functional DnD book for my players and myself. To see the repo page put in "/natZeroRepo" at the end of the URL.
+        </p>
         <p> 
-          Offical Credits:
+          Offical Credits: <br>
+          Navigation - Credit to Andor Hagy (<a href="https://codepen.io/andornagy/pen/RNeydj">https://codepen.io/andornagy/pen/RNeydj</a>)
         </p>
         `
         document.getElementById("content").innerHTML = html;
@@ -228,10 +236,38 @@
           `
         }
         if(key == "calendar"){
+          const time = lore.calendar;
           html = `
-            <h2> 
-              Display Calendar
-            </h2>
+            <header>
+              Present Year: ${time.year}
+            </header>
+            <br>
+            <header>
+              Days of the Week
+            </header>
+            <header class="infoblock">
+              There are 8 days of the week in Erythia
+            </header>
+            <p>
+          `
+          for(let i = 0; i<time.days.length; i++){
+            html += `<b>${time.days[i]}</b><br>`;
+          }
+          html += `
+            </p>
+            <header>
+              Months of the Year
+            </header>
+            <header class="infoblock">
+              There are 10 Months of the Year in Erythia
+            </header>
+            <p>
+          `;
+          for(let i = 0; i<time.months.length; i++){
+            html += `<b>${time.months[i]}</b><br>`;
+          }
+          html += `
+            </p>
           `
         }
         
@@ -401,7 +437,7 @@
                 <ul>
                     <li><a href="#" onclick="handleClick('lore-gods')">Dieties</a></li>
                     <li><a href="#" onclick="handleClick('lore-continents')">Continents X</a></li>
-                    <li><a href="#" onclick="handleClick('lore-calendar')">Calendar X</a></li>
+                    <li><a href="#" onclick="handleClick('lore-calendar')">Calendar</a></li>
                 </ul> 
 
             </li>
