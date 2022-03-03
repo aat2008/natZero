@@ -615,7 +615,7 @@
                     "title": "The Grand Feast",
                     "domains": ["Celebration", "Love", "Luck"],
                     "holysymbol": "A vine of grapes",
-                    "facts": [],
+                    "facts": [""],
                     "presenting": "Masculine"
                 },
                 "adir":{
